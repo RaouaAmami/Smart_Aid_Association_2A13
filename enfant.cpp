@@ -1,0 +1,90 @@
+#include "enfant.h"
+
+enfant::enfant()
+{
+
+
+}
+bool enfant::ajouter()
+{
+    QSqlQuery query;
+
+
+    query.prepare("INSERT INTO ENFANTS (ID_E,NOME,PRENOME,GENRE,DATE_NAISS,DATEINS)" "values(:id,:nom,:prenom,:genre,:date_n,:date_ins)");
+    query.bindValue(":id",id);
+    query.bindValue(":nom",nom);
+    query.bindValue(":prenom",prenom);
+    query.bindValue(":genre",genre);
+    query.bindValue(":date_n",date_n);
+    query.bindValue(":date_ins",date_ins);
+
+    return query.exec();
+}
+QSqlQueryModel * enfant::afficher()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+
+    model->setQuery("SELECT *FROM ENFANTS ");
+
+
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRENOM"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("GENRE"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("DATE_NAISS"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("DATEINS"));
+
+
+
+
+    model->setQuery("SELECT ID_E,NOME,PRENOME,GENRE,DATE_NAISS,DATEINS FROM ENFANTS");
+    return model;
+
+}
+bool enfant::supprimer(QString id)
+{
+    QSqlQuery query;
+    query.prepare("Delete from ENFANTS where ID_E = :id ");
+    query.bindValue(":id",id);
+    return query.exec();
+}
+bool enfant::modifier(QString id)
+{
+
+    QSqlQuery query;
+
+
+
+    query.prepare("UPDATE ENFANTS SET NOME = :nom,PRENOME = :prenom ,GENRE = :genre,DATE_NAISS = :date_n ,DATEINS = :date_ins WHERE ID_E = :id ");
+
+    query.bindValue(":id",id);
+    query.bindValue(":nom",nom);
+    query.bindValue(":prenom",prenom);
+    query.bindValue(":genre",genre);
+    query.bindValue(":date_n",date_n);
+    query.bindValue(":date_ins",date_ins);
+
+    return query.exec();
+
+
+
+
+}
+QSqlQueryModel * enfant::recherche(QString id)
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+
+    model->setQuery("SELECT * FROM ENFANTS WHERE ID_E LIKE '%"+id+"%'");
+    model->query().bindValue(":id",id);
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_E"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOME"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRENOME"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("GENRE"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("DATE_NAISS"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("DATEINS"));
+    return model;
+}
+
+
+
+
