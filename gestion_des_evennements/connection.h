@@ -6,7 +6,7 @@
 #include <QSqlQuery>     /* bc y9ra les requetes */
 
 class Connection
-{
+{   QSqlDatabase db;
 public:
     Connection();
     bool createConnection();

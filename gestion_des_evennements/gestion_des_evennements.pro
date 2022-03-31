@@ -1,5 +1,7 @@
 QT       += core gui sql
 
+QT       += printsupport  multimedia serialport location qml quickwidgets multimediawidgets widgets
+QT       += charts network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -19,24 +21,36 @@ SOURCES += \
     connection.cpp \
     evenement.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    maps.cpp \
+    projetcalender.cpp \
+    stat_categorie.cpp
 
 HEADERS += \
     connection.h \
     evenement.h \
-    mainwindow.h
+    mainwindow.h \
+    maps.h \
+    projetcalender.h \
+    stat_categorie.h \
+
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    maps.ui \
+    stat_categorie.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+
+
 DISTFILES += \
     C:/Users/21692/Downloads/BG QT.jpg \
     C:/Users/21692/Downloads/LOGIIN QT.jpg
 
 RESOURCES += \
+    qml.qrc \
     ressources.qrc
