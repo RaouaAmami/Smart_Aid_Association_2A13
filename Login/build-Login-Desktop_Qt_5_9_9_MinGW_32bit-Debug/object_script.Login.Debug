@@ -1,0 +1,15 @@
+INPUT(
+./debug\chefprotocol.o
+./debug\employee.o
+./debug\main.o
+./debug\connection.o
+./debug\mainwindow.o
+./debug\rawaa.o
+./debug\.o
+./debug\stmp.o
+./debug\qrc_ressources.o
+./debug\moc_chefprotocol.o
+./debug\moc_mainwindow.o
+./debug\moc_rawaa.o
+./debug\moc_stmp.o
+);

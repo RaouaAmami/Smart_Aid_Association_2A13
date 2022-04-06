@@ -1,0 +1,15 @@
+INPUT(
+./release\chefprotocol.o
+./release\employee.o
+./release\main.o
+./release\connection.o
+./release\mainwindow.o
+./release\rawaa.o
+./release\.o
+./release\stmp.o
+./release\qrc_ressources.o
+./release\moc_chefprotocol.o
+./release\moc_mainwindow.o
+./release\moc_rawaa.o
+./release\moc_stmp.o
+);
