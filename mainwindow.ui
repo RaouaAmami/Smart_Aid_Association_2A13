@@ -286,7 +286,7 @@ font: 75 9pt &quot;MS Shell Dlg 2&quot;;</string>
      <string>Mettre à jour un Don</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pushButton_pdf">
     <property name="geometry">
      <rect>
       <x>710</x>
@@ -296,7 +296,7 @@ font: 75 9pt &quot;MS Shell Dlg 2&quot;;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 96, 99);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Imprimer la liste des Dons</string>
@@ -354,32 +354,6 @@ font: 75 9pt &quot;MS Shell Dlg 2&quot;;</string>
      <string>Trier par : </string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>170</y>
-      <width>83</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Type</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_2">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>200</y>
-      <width>83</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>ID</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
@@ -414,6 +388,32 @@ font: 75 9pt &quot;MS Shell Dlg 2&quot;;</string>
     </property>
     <property name="text">
      <string>Actualiser</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>200</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ID</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_7">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>160</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Type</string>
     </property>
    </widget>
   </widget>

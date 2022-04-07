@@ -2,12 +2,23 @@
 #include "ui_mainwindow.h"
 #include "dons.h"
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QPainter>
+#include <QDate>
+#include <QPdfWriter>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QPixmap>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->lineEdit->setValidator(new QRegExpValidator(QRegExp("[0-9]*")));
+    ui->lineEdit_2->setValidator(new QRegExpValidator(QRegExp("[a-zA-Z]*")));
+    ui->lineEdit_3->setValidator(new QRegExpValidator(QRegExp("[a-zA-Z]*")));
+
 
     ui->tableView->setModel(D.afficher());
 
@@ -116,4 +127,72 @@ void MainWindow::on_pushButton_clicked()
                                       "Click Cancel to exit."), QMessageBox::Cancel);
 
         //}
+}
+void MainWindow::on_pushButton_6_clicked()
+{
+    ui->tableView->setModel(D.tri());
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    ui->tableView->setModel(D.trii());
+}
+
+void MainWindow::on_lineEdit_4_cursorPositionChanged(int arg1, int arg2)
+{
+    QString nom=ui->lineEdit_4->text();
+            // qDebug()<<nom;
+             if(nom!=""){
+            ui->tableView->setModel(D.rechercher(nom));
+             }
+             else
+            {ui->tableView->setModel(D.afficher());}
+}
+
+
+void MainWindow::on_pushButton_pdf_clicked()
+{
+    QPdfWriter pdf("C:/Users/PC/Desktop/DossierPDF/Fares.pdf");
+
+            QPainter painter(&pdf);
+
+            int i = 4000;
+            painter.setPen(Qt::red);
+            painter.setFont(QFont("Arial", 30));
+            painter.drawText(3000,1500,"LISTE DES DONS ");
+            painter.setPen(Qt::black);
+            painter.setFont(QFont("Arial", 50));
+            // painter.drawText(1100,2000,afficheDC);
+            painter.drawRect(2700,200,7300,2600);
+            painter.drawRect(0,3000,9600,500);
+            painter.setFont(QFont("Arial", 9));
+            painter.drawText(300,3300,"Identifiant");
+            painter.drawText(2300,3300,"NOM_DONATEUR");
+            painter.drawText(4300,3300,"PRENOM_DONATEUR");
+            painter.drawText(6300,3300,"TYPE_DON");
+            painter.drawText(8000,3300,"DATE_DON");
+            QSqlQuery query;
+            query.prepare("select * from DONS");
+            query.exec();
+            while (query.next())
+            {
+                painter.drawText(300,i,query.value(0).toString());
+                painter.drawText(2300,i,query.value(1).toString());
+                painter.drawText(4300,i,query.value(2).toString());
+                painter.drawText(6300,i,query.value(3).toString());
+                painter.drawText(8000,i,query.value(4).toString());
+                i = i +500;
+            }
+
+            int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?", QMessageBox::Yes |  QMessageBox::No);
+            if (reponse == QMessageBox::Yes)
+            {
+                QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/PC/Desktop/DossierPDF/Fares.pdf"));
+
+                painter.end();
+            }
+            if (reponse == QMessageBox::No)
+            {
+                painter.end();
+            }
 }

@@ -28,6 +28,16 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_checkBox_2_stateChanged(int arg1);
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_7_clicked();
+
+    void on_lineEdit_4_cursorPositionChanged(int arg1, int arg2);
+
+    void on_pushButton_pdf_clicked();
+
 private:
     Ui::MainWindow *ui;
     Dons D;

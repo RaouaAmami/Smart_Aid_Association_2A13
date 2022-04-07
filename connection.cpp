@@ -25,20 +25,4 @@ test=true;
 }
 
 
-/*#include "connection.h"
 
-Connection::Connection(){}
-
-bool Connection::createconnection()
-{
-    db = QSqlDatabase::addDatabase("QODBC");
-   bool test=false;
-   db.setDatabaseName("Projet_Desktop_2A13");
-   db.setUserName("Feres");
-   db.setPassword("0000");
-   if (db.open()) test=true;
-
-   return test;
-}
-
-void Connection::closeConnection(){db.close();}*/

@@ -36,6 +36,9 @@ public:
     QSqlQueryModel * afficher();
     bool supprimer(QString);
     bool modifier(QString,QString,QString,QString,QDate);
+    QSqlQueryModel * tri();
+    QSqlQueryModel * trii();
+    QSqlQueryModel * rechercher(QString);
 
 };
 

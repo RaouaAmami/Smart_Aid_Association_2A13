@@ -53,23 +53,7 @@ bool Dons::supprimer(QString ID_DON)
     return query.exec();
 }
 
-//bool Dons::modifier(QString ID_DON)
 
-/*bool Dons::modifier(QString ID_DON,QString NOM_DONATEUR,QString PRENOM_DONATEUR,QString TYPE_DON,QDate DATE_DON)
-{
-QSqlQuery query;
-
-query.prepare("Update DONS set ID_DON=:ID_DON, NOM_DONATEUR =:NOM_DONATEUR, PRENOM_DONATEUR=:PRENOM_DONATEUR , TYPE_DON=:TYPE_DON , DATE_DON =:DATE_DON where ID_DON =:ID_DON ");
-query.bindValue("ID_DON",ID_DON);
-query.bindValue("NOM_DONATEUR",NOM_DONATEUR);
-query.bindValue("PRENOM_DONATEUR",PRENOM_DONATEUR);
-query.bindValue("TYPE_DON",TYPE_DON);
-query.bindValue("DATE_DON",DATE_DON);
-
-
-
-return    query.exec();
-}*/
 
 bool Dons :: modifier(QString ID_DON,QString NOM_DONATEUR,QString PRENOM_DONATEUR,QString TYPE_DON,QDate DATE_DON)
 {
@@ -86,4 +70,42 @@ bool Dons :: modifier(QString ID_DON,QString NOM_DONATEUR,QString PRENOM_DONATEU
 
 
    return  qry.exec();
+}
+
+QSqlQueryModel *Dons::tri()
+{
+
+    QSqlQuery *q = new QSqlQuery();
+    QSqlQueryModel *model = new QSqlQueryModel();
+    q->prepare("SELECT * FROM  DONS ORDER BY ID_DON ");
+    q->exec();
+    model->setQuery(*q);
+    return model;
+}
+
+
+QSqlQueryModel *Dons::trii()
+{
+
+    QSqlQuery *q = new QSqlQuery();
+    QSqlQueryModel *model = new QSqlQueryModel();
+    q->prepare("SELECT * FROM  DONS ORDER BY TYPE_DON ");
+    q->exec();
+    model->setQuery(*q);
+    return model;
+}
+
+QSqlQueryModel * Dons::rechercher(QString mot)
+{
+     QSqlQuery query;
+     query.prepare("SELECT * FROM DONS where ((NOM_DONATEUR like :NOMC) or (PRENOM_DONATEUR like :NOMC) or (TYPE_DON like :NOMC) or "
+        "(DATE_DON like :NOMC))");
+     query.bindValue(":NOMC", mot);
+     query.exec();
+
+    QSqlQueryModel * model= new QSqlQueryModel();
+         model->setQuery(query);
+
+
+    return model;
 }
