@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/ressources">
-        <file>img/loginicon.png</file>
-    </qresource>
-</RCC>
