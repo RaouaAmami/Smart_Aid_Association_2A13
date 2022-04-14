@@ -20,13 +20,15 @@ SOURCES += \
     dons.cpp \
     main.cpp \
     mainwindow.cpp \
-    qrcode.cpp
+    qrcode.cpp \
+    stat_categorie.cpp
 
 HEADERS += \
     connection.h \
     dons.h \
     mainwindow.h \
-    qrcode.h
+    qrcode.h \
+    stat_categorie.h
 
 FORMS += \
     mainwindow.ui

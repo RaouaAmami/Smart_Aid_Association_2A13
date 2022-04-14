@@ -196,3 +196,13 @@ void MainWindow::on_pushButton_pdf_clicked()
                 painter.end();
             }
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+
+}
