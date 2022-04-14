@@ -13,18 +13,20 @@
 class enfant
 {
 private:
-    QString id,nom,prenom,genre;
+    QString id,nom,prenom,genre,photo;
     QDate   date_n,date_ins;
 
 public:
     enfant();
-    enfant(QString id,QString nom ,QString prenom ,QString genre,QDate date_n,QDate date_ins ){
+    enfant(QString id,QString nom ,QString prenom ,QString genre,QDate date_n,QDate date_ins,QString photo ){
         this->id = id ;
         this->nom = nom;
         this->prenom=prenom;
         this->genre=genre;
         this->date_n=date_n;
         this->date_ins=date_ins;
+        this->photo=photo;
+
 
 
 
@@ -49,6 +51,7 @@ public:
 
     QSqlQueryModel * afficher();
     QSqlQueryModel * recherche(QString id);
+      QSqlQueryModel * tri();
 };
 
 #endif
