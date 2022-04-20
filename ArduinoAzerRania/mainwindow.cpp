@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
      QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label())); // permet de lancer
      //le slot update_label suite à la reception du signal readyRead (reception des données).
+
 }
 
 MainWindow::~MainWindow()
@@ -28,30 +29,38 @@ MainWindow::~MainWindow()
 
 void MainWindow::update_label()
 {
-    data=A.read_from_arduino();
+    /*parking P ;
+     data=A.read_from_arduino();
 
-    if(data=="1")
+      QString Sstring = QString(data);
+      Sstring.remove("\r\n");
+      ui->label_3->setText(data);
 
-        ui->label_3->setText("PORTE OUVERTE");
-
-
-    else if (data=="0")
-
-        ui->label_3->setText("PORTE FERMEE");
-
+      qDebug() << Sstring;
+       bool test=P.verifier(Sstring);
+      if (test){
+         A.write_to_arduino("0");
+      }
+      else
+          A.write_to_arduino("1");*/
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    parking P ;
-     int ID_EMP=ui->lineEdit->text().toInt();
-      bool test=P.verifier(ID_EMP);
-     ui->lineEdit->clear();
+   parking P ;
+    data=A.read_from_arduino();
+
+     QString Sstring = QString(data);
+     Sstring.remove("\r\n");
+     ui->label_3->setText(data);
+
+     qDebug() << Sstring;
+      bool test=P.verifier(Sstring);
      if (test){
-        A.write_to_arduino("1");
+        A.write_to_arduino("0");
      }
      else
-         A.write_to_arduino("0");
+         A.write_to_arduino("1");
 }
 
 

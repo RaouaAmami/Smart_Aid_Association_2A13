@@ -6,13 +6,13 @@ parking::parking()
 
 }
 
-bool parking::verifier(int ID_EMP)
+bool parking::verifier(QString PW)
 {
     QSqlQuery query;
-    QString res=QString::number(ID_EMP);
+    QString res= PW;
     query.prepare("SELECT * FROM EMPLOYEES WHERE ID_EMP=:ID_EMP;");
-    query.bindValue(":ID_EMP",res);
-
+    query.bindValue(":ID_EMP",PW);
+    qDebug() << query.last();
 
     query.exec();
     query.next();

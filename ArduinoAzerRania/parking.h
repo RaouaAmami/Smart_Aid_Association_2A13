@@ -7,7 +7,7 @@ class parking
 {
 public:
     parking();
-    bool verifier(int);
+    bool verifier(QString);
 };
 
 #endif // PARKING_H

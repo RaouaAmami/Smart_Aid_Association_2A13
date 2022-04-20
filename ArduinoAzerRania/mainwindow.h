@@ -31,7 +31,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QByteArray data; // variable contenant les données reçues
+    QString data;
+    QByteArray Pass;// variable contenant les données reçues
 
     Arduino A; // objet temporaire
 };
