@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 #include"dons.h"
 #include <QMainWindow>
+#include"arduino.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -41,11 +43,14 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_pushButton_8_clicked();
+    void update_label();
 
 private:
     Ui::MainWindow *ui;
     Dons D;
+    Arduino A;
 };
+
 
 #endif // MAINWINDOW_H
 
