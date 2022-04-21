@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "stat_categorie.h"
 #include "maps.h"
+#include<arduino.h>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -21,7 +23,7 @@ private slots:
 
     void on_pushButton_afficher_clicked();
 
-    void on_pushButton_clicked();
+    void on_pushButton_4_clicked();
 
     void on_pushButton_supp_clicked();
 
@@ -41,10 +43,18 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void update_label();
+
+    //void on_pushButton_4_clicked();
+
+    void on_label_linkActivated(const QString &link);
+
 private:
 
 
     Ui::MainWindow *ui;
+    QByteArray data;
+        Arduino A;
     evenement e ;
 
     stat_categorie *third;
@@ -74,6 +84,10 @@ private:
       void on_pushButton_2_released();
 
       void on_pushButton_2_pressed();
+
+      //void on_pushButton_4_clicked();
+
+      void on_pushButton_clicked();
 
 signals:
      void setCenter(QVariant, QVariant);

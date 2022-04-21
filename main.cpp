@@ -3,6 +3,7 @@
 #include <QtDebug>
 #include <QMessageBox>
 #include <QApplication>
+#include<arduino.h>
 
 int main(int argc, char *argv[])
 {

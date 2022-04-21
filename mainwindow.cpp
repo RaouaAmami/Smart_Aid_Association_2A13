@@ -4,6 +4,13 @@
 #include "evenement.cpp"
 #include <QMessageBox> // bib bsh tatina les messages erreur w ila succe
 #include<QFileDialog>
+//arduino
+#include<QDebug>
+#include<arduino.h>
+#include<QObject>
+#include<QtSerialPort>
+#include<QtSerialPort/QSerialPort> //classe rassemblant des fonctions permettent l'echange des données
+#include<QtSerialPort/QSerialPortInfo> //classe fournissant des informations sur les ports disponibles*
 
 
 
@@ -48,7 +55,18 @@ MainWindow::MainWindow(QWidget *parent)  //constructeur mta graphique lhajet li 
 {
     ui->setupUi(this);
 
-
+//arduino
+    int ret=A.connect_arduino();
+    switch(ret)
+    {
+    case(0):qDebug()<< "arduino is available and connected to : " << A.getarduino_port_name();
+        break;
+    case(1):qDebug()<<"arduino is available but not connected to : " << A.getarduino_port_name();
+        break;
+    case(-1):qDebug()<<"arduino is not available : " << A.getarduino_port_name();
+    }
+    QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+    //
 
 
 
@@ -110,7 +128,7 @@ void MainWindow::on_pushButton_afficher_clicked()
      ui->event->setModel(e.afficher());
 }
 
-void MainWindow::on_pushButton_clicked()//houni tzid l verif
+/*void MainWindow::on_pushButton_clicked()//houni tzid l verif
 {
     int id_event=ui->line_id->text().toInt();
       QString libelle=ui->line_libelle->text();
@@ -131,7 +149,7 @@ void MainWindow::on_pushButton_clicked()//houni tzid l verif
             { msgBox.setText("Echec d'ajout");}
 
        msgBox.exec();
-}
+}*/
 
 
 
@@ -564,4 +582,68 @@ void MainWindow::on_pushButton_2_pressed()
              }
 calendar->show();
 
+}
+
+
+
+void MainWindow::update_label() //affichage
+{
+    data=A.read_from_arduino();//data hya y9raha qt ml arduino //
+    QString Sstring = QString(data); //
+         Sstring.remove("\r\n");//tna7i /r , /n
+
+ if (Sstring== "0")
+ui->label->setText("mouvement détécté ");
+
+else if (Sstring == "1")
+ui->label->setText("Pas de mouvement");
+}
+
+
+
+
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+A.write_to_arduino("2");//ki tnzel al button heki ybaath ll arduino 2
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    int id_event=ui->line_id->text().toInt();
+      QString libelle=ui->line_libelle->text();
+      QString lieu=ui->line_lieu->text();
+     QString type=ui->combotype->currentText();
+    QDate datee=ui->dateEdit->date();
+
+       evenement e(id_event,libelle,lieu,type,datee);
+
+       bool test=e.ajouter();
+       QMessageBox msgBox;
+
+         if(test)
+           {  msgBox.setText("Ajout avec succes.");
+             ui->event->setModel(e.afficher());
+         }
+         else
+            { msgBox.setText("Echec d'ajout");}
+
+       msgBox.exec();
 }
