@@ -145,5 +145,38 @@ void employee::exporterpdff(QTextBrowser *text)
     printer.setOutputFileName(fileName);
     text->print(&printer);
 }
+QString employee::login(QString us, QString pw)
+{
+   /* QSqlQuery query;
+    query.prepare("SELECT * FROM LOGIN where USERNAME=:USERNAME and PASSWORD=:PASSWORD");
+    query.bindValue(":USERNAME", us);
+    query.bindValue(":PASSWORD", pw);
+    query.exec();*/
 
+
+            bool exists = false;
+
+            QSqlQuery query;
+            QString page ;
+            query.prepare("SELECT PAGE FROM LOGIN WHERE USERNAME = (:un) AND PASSWORD = (:pw)");
+            query.bindValue(":un", us);
+            query.bindValue(":pw", pw);
+
+            if (query.exec())
+            {
+                if (query.next())
+                {
+                    exists = true;
+                    page=query.value(0).toString();
+
+                }
+            }
+
+            return page;
+
+
+
+
+
+}
 

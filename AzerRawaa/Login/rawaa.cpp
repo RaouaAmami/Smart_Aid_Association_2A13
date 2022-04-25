@@ -7,6 +7,7 @@ Rawaa::Rawaa(QWidget *parent) :
     ui(new Ui::Rawaa)
 {
     ui->setupUi(this);
+     ui->tableView1->setModel(tmpenfant.afficher());
 }
 
 Rawaa::~Rawaa()
@@ -29,8 +30,8 @@ void Rawaa::on_pushButton_clicked()
 
     if( ui->lineEdit->text().isEmpty() || ui->lineEdit_2->text().isEmpty()|| ui->lineEdit_3->text().isEmpty() )
     {
-        QMessageBox::warning(nullptr, QObject::tr("Attention"),
-                             QObject::tr("Veuillez remplir tout les champs.\n"), QMessageBox::Ok);
+        //QMessageBox::warning(nullptr, QObject::tr("Attention"),
+                            // QObject::tr("Veuillez remplir tout les champs.\n"), QMessageBox::Ok);
     }
     else{
         id=ui->lineEdit->text();
@@ -53,23 +54,24 @@ void Rawaa::on_pushButton_clicked()
 
         if (test)
         {
-            QMessageBox::information(nullptr, QObject::tr("Ajouter un   enfant"),
-                                     QObject::tr("  enfant ajouté.\n"
-                                                 "Click Cancel to exit."));
+            //QMessageBox::information(nullptr, QObject::tr("Ajouter un   enfant"),
+                                     //QObject::tr("  enfant ajouté.\n"
+                                                // "Click Cancel to exit."));
            // ui->tableView->setModel(tmpenfant.afficher());
         }
         else
         {
-            QMessageBox::critical(nullptr, QObject::tr("Ajouter un  enfant"),
-                                  QObject::tr("Erreur !.\n"
-                                              "Click Cancel to exit."));
+            //QMessageBox::critical(nullptr, QObject::tr("Ajouter un  enfant"),
+                                  //QObject::tr("Erreur !.\n"
+                                             // "Click Cancel to exit."));
         }
     }
 
+     ui->tableView1->setModel(tmpenfant.afficher());
 
 }
 
-/*void Rawaa::on_pushButton_4_clicked()
+void Rawaa::on_pushButton_4_clicked()
 {
 
     QString id,nom,prenom,genre,photo;
@@ -98,16 +100,16 @@ void Rawaa::on_pushButton_clicked()
 
     if (test)
     {
-        QMessageBox::information(nullptr, QObject::tr("Modifier un   enfant"),
-                                 QObject::tr("  enfant Modifié.\n"
-                                             "Click Cancel to exit."), QMessageBox::Cancel);
-        ui->tableView->setModel(tmpenfant.afficher());//refresh
+        //QMessageBox::information(nullptr, QObject::tr("Modifier un   enfant"),
+                                // QObject::tr("  enfant Modifié.\n"
+                                           //  "Click Cancel to exit."), QMessageBox::Cancel);
+        ui->tableView1->setModel(tmpenfant.afficher());//refresh
     }
     else
     {
-        QMessageBox::critical(nullptr, QObject::tr("Modifier un enfant"),
-                              QObject::tr("Erreur !.\n"
-                                          "Click Cancel to exit."), QMessageBox::Cancel);
+        //QMessageBox::critical(nullptr, QObject::tr("Modifier un enfant"),
+                             // QObject::tr("Erreur !.\n"
+                                          //"Click Cancel to exit."), QMessageBox::Cancel);
     }
 }
 
@@ -116,18 +118,18 @@ void Rawaa::on_pushButton_3_clicked()
     QString id=ui->lineEdit->text();
     enfant e;
     bool test=e.supprimer(id);
-    ui->tableView->setModel(tmpenfant.afficher());//refresh
+    ui->tableView1->setModel(tmpenfant.afficher());//refresh
     if(test)
     {
-        QMessageBox::information(nullptr, QObject::tr("Supprimer enfant"),
-                                 QObject::tr("enfant supprimé.\n"
-                                             "Click Cancel to exit."), QMessageBox::Cancel);
+        //QMessageBox::information(nullptr, QObject::tr("Supprimer enfant"),
+                                // QObject::tr("enfant supprimé.\n"
+                                            // "Click Cancel to exit."), QMessageBox::Cancel);
     }
     else
     {
-        QMessageBox::critical(nullptr, QObject::tr("enfant un categorie"),
-                              QObject::tr("Erreur !.\n"
-                                          "Click Cancel to exit."), QMessageBox::Cancel);
+        //QMessageBox::critical(nullptr, QObject::tr("enfant un categorie"),
+                             // QObject::tr("Erreur !.\n"
+                                         // "Click Cancel to exit."), QMessageBox::Cancel);
     }
 }
 
@@ -172,19 +174,19 @@ void Rawaa::on_pushButton_8_clicked()
 
 void Rawaa::on_lineEdit_4_textChanged(const QString &arg1)
 {
-    ui->tableView->setModel(tmpenfant.recherche(arg1));
+    ui->tableView1->setModel(tmpenfant.recherche(arg1));
 }
 
 void Rawaa::on_pushButton_7_clicked()
 {
-    ui->tableView->setModel(tmpenfant.tri());
+    ui->tableView1->setModel(tmpenfant.tri());
 }
 
 void Rawaa::on_pushButton_6_clicked()
 {
     QTableView *table;
 
-        table = ui->tableView;
+        table = ui->tableView1;
 
 
         QString filters("Excel Files (.xlsx)");
@@ -256,8 +258,8 @@ void Rawaa::on_pushButton_2_clicked()
     QString strStream;
         QTextStream out(&strStream);
 
-        const int rowCount = ui->tableView->model()->rowCount();
-        const int columnCount = ui->tableView->model()->columnCount();
+        const int rowCount = ui->tableView1->model()->rowCount();
+        const int columnCount = ui->tableView1->model()->columnCount();
 
         out <<  "<html>\n"
                "<head>\n"
@@ -272,16 +274,16 @@ void Rawaa::on_pushButton_2_clicked()
         // headers
         out << "<thead><tr bgcolor=#f0f0f0> <th>Numero</th>";
         for (int column = 0; column < columnCount; column++)
-            if (!ui->tableView->isColumnHidden(column))
-                out << QString("<th>%1</th>").arg(ui->tableView->model()->headerData(column, Qt::Horizontal).toString());
+            if (!ui->tableView1->isColumnHidden(column))
+                out << QString("<th>%1</th>").arg(ui->tableView1->model()->headerData(column, Qt::Horizontal).toString());
         out << "</tr></thead>\n";
 
         // data table
         for (int row = 0; row < rowCount; row++) {
             out << "<tr> <td bkcolor=0>" << row+1 <<"</td>";
             for (int column = 0; column < columnCount; column++) {
-                if (!ui->tableView->isColumnHidden(column)) {
-                    QString data = ui->tableView->model()->data(ui->tableView->model()->index(row, column)).toString().simplified();
+                if (!ui->tableView1->isColumnHidden(column)) {
+                    QString data = ui->tableView1->model()->data(ui->tableView1->model()->index(row, column)).toString().simplified();
                     out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
                 }
             }
@@ -307,24 +309,13 @@ void Rawaa::on_pushButton_2_clicked()
 
 void Rawaa::on_pushButton_5_clicked()
 {
-   // QFileDialog dialog(this);
-       // dialog.setNameFilter(tr("images (*.png *.xpm *.jpg)"));
-        //dialog.setViewMode(QFileDialog::Detail);
-        //QString fileName =QFileDialog::getOpenFileName(this, tr("Open Images"), "C:/Users/RAOUA/OneDrive/Desktop/photo", tr("image Files (*.png *.xpm *.jpg)"));
-        //to select and show the picture
-        //if (!fileName.isEmpty())
-        //{
-            //QImage image(fileName);
-            //image=image.scaledToWidth(ui->label_3->width(),Qt::SmoothTransformation);
-           // ui->label_3->setPixmap(QPixmap::fromImage(image));
-            //ui->lineEdit_5->insert(fileName);
-        //}
+
 
     QFileDialog dialog(this);
     dialog.setNameFilter(tr("Images (*.png *.bmp *.jpg)"));
     dialog.setViewMode(QFileDialog::Detail);
     QString fileName =QFileDialog::getOpenFileName(this, tr("Open Images"), "C:/Users/RAOUA/OneDrive/Desktop/photo", tr("Image Files (*.png *.jpg *.bmp)"));
-//to select and show the picture
+
     if (!fileName.isEmpty())
     {
         QImage image(fileName);
@@ -335,4 +326,4 @@ void Rawaa::on_pushButton_5_clicked()
 
 }
 }
-*/
+

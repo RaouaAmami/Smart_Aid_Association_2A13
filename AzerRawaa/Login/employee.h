@@ -41,6 +41,7 @@ public:
     QSqlQueryModel * afficherTri_prenom();
     QSqlQueryModel * afficherTri_cin();
     void exporterpdff(QTextBrowser *text);
+    QString login(QString us , QString pw);
 
 };
 

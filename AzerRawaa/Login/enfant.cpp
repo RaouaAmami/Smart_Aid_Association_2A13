@@ -10,14 +10,14 @@ bool enfant::ajouter()
     QSqlQuery query;
 
 
-    query.prepare("INSERT INTO ENFANT (ID_E,NOME,PRENOME,DATE_NAISS,DATEINS)" "values(:id,:nom,:prenom,:date_n,:date_ins)");
+    query.prepare("INSERT INTO ENFANTS (ID_E,NOME,PRENOME,DATE_NAISS,DATEINS,GENRE,PHOTO)" "values(:id,:nom,:prenom,:date_n,:date_ins,:genre,:photo)");
     query.bindValue(":id",id);
     query.bindValue(":nom",nom);
     query.bindValue(":prenom",prenom);
     query.bindValue(":date_n",date_n);
     query.bindValue(":date_ins",date_ins);
-    //query.bindValue(":genre",genre);
-   // query.bindValue(":photo",photo);
+    query.bindValue(":genre",genre);
+    query.bindValue(":photo",photo);
 
 
     return query.exec();
@@ -26,7 +26,7 @@ QSqlQueryModel * enfant::afficher()
 {
     QSqlQueryModel * model= new QSqlQueryModel();
 
-    model->setQuery("SELECT *FROM ENFANTS ");
+    model->setQuery("SELECT * FROM ENFANT ");
 
 
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_E"));
@@ -41,7 +41,7 @@ QSqlQueryModel * enfant::afficher()
 
 
 
-    model->setQuery("SELECT ID_E,NOME,PRENOME,DATE_NAISS,DATEINS,GENRE,PHOTO FROM ENFANTS");
+    model->setQuery("SELECT ID_E,NOME,PRENOME,DATE_NAISS,DATEINS FROM ENFANTS");
     return model;
 
 }
