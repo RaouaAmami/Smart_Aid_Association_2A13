@@ -3,8 +3,11 @@
 
 #include <QMainWindow>
 #include "chefprotocol.h"
+
 #include "rawaa.h"
+#include "rania.h"
 #include "employee.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -20,9 +23,13 @@ public:
 private slots:
     void on_pushButton_Login_clicked();
 
+
+
 private:
     Ui::MainWindow *ui;
     ChefProtocol *chefprotocol;
+
+    Rania *rania ;
     Rawaa *rawaa ;
 
 

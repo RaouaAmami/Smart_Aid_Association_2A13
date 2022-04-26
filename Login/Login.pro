@@ -1,3 +1,11 @@
+QT += printsupport
+QT       += core gui
+QT       += core gui sql
+QT += core gui network
+QT       += charts serialport multimedia multimediawidgets  widgets
+
+TARGET = mail
+CONFIG += c++11
 QT       += core gui \
     quick
 QT+=sql
@@ -18,24 +26,43 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    arduino.cpp \
+    benevol.cpp \
     chefprotocol.cpp \
     employee.cpp \
+    enfant.cpp \
     main.cpp \
     connection.cpp \
     mainwindow.cpp \
-    rawaa.cpp
+    parking.cpp \
+    rania.cpp \
+    rawaa.cpp \
+    stat.cpp \
+    stmp.cpp \
+    video.cpp
 
 HEADERS += \
+    arduino.h \
+    benevol.h \
     chefprotocol.h \
     employee.h \
+    enfant.h \
     mainwindow.h \
     connection.h \
-    rawaa.h
+    parking.h \
+    rania.h \
+    rawaa.h \ \
+    stat.h \
+    stmp.h \
+    video.h
 
 FORMS += \
     chefprotocol.ui \
     mainwindow.ui \
-    rawaa.ui
+    rania.ui \
+    rawaa.ui \
+    stat.ui \
+    video.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -44,3 +71,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     ressources.qrc
+

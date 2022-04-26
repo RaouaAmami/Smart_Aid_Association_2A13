@@ -7,6 +7,15 @@
 #include <QMessageBox>
 #include <QApplication>
 #include "connection.h"
+#include "stmp.h"
+#include <QModelIndex>
+#include <QItemDelegate>
+#include <QSize>
+#include <QSpinBox>
+#include <QDebug>
+#include <list>
+#include <QTextBrowser>
+
 
 
 
@@ -44,7 +53,7 @@ void ChefProtocol::on_Ajouter_clicked()
 
     employee E(ID_EMP,nom,prenom,CIN,role,mail);
     bool testa=E.ajouter();
-    QMessageBox msg;
+   QMessageBox msg;
     if (testa){
 
 
@@ -101,3 +110,96 @@ void ChefProtocol::on_supprimer_clicked()
           // { msgBox.setText("Echec de suppression");}
            // msgBox.exec();
 }
+
+void ChefProtocol::on_pushButton_3_clicked()
+{
+    int ID_EMP=ui->lineEdit_MID->text().toInt();
+    QString nom=ui->lineEdit_MNOM->text();
+    QString prenom=ui->lineEdit_MPRENOM->text();
+    int CIN=ui->lineEdit_MCIN->text().toInt();
+    QString mail=ui->lineEdit_MMAIL->text();
+    QString role=ui->lineEdit_MROLE->text();
+    employee E(ID_EMP,nom,prenom,CIN,role,mail);
+    bool testm=E.modifier();
+    if (testm){
+        ui->tableView->setModel(E.afficher());
+
+    }
+
+}
+
+
+void ChefProtocol::on_line_recherche_textEdited(const QString &arg1)
+{
+
+
+
+             QString nom=ui->line_recherche->text();
+            // qDebug()<<nom;
+             if(nom!=""){
+            ui->tableView->setModel(E.rechercher(nom));
+             }
+             else
+            {ui->tableView->setModel(E.afficher());}
+
+
+
+}
+
+void ChefProtocol::on_comboBox_currentIndexChanged(const QString &arg1)
+{
+    int value=ui->comboBox->currentIndex();
+
+
+        //qDebug()<<value;
+        if (value==0)
+        {
+            ui->tableView->setModel(E.afficherTri_id());
+
+        }
+        if (value==1)
+        {
+            ui->tableView->setModel(E.afficherTri_nom());
+
+        }
+        if (value==2)
+        {
+            ui->tableView->setModel(E.afficherTri_prenom());
+
+        }
+        if (value==3)
+        {
+            ui->tableView->setModel(E.afficherTri_cin());
+
+        }
+}
+
+void ChefProtocol::sendMail()
+{
+    Smtp* smtp = new Smtp("azersebeiqt@gmail.com", "Azerty007A","smtp.gmail.com",465,30000);
+    connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
+    smtp->sendMail("promotion", ui->lineEdit_10->text() , ui->lineEdit_9->text(),ui->textEdit->toPlainText());
+}
+
+
+
+void ChefProtocol::mailSent(QString status)
+{
+   if(status == "Message sent")
+        QMessageBox::warning( 0, tr( "Qt Simple SMTP client" ), tr( "Message sent!\n\n" ) );
+}
+
+
+
+
+void ChefProtocol::on_envoyer_clicked()
+{
+  connect(ui->envoyer, SIGNAL(clicked()),this, SLOT(sendMail()));
+}
+
+void ChefProtocol::on_generer_clicked()
+{
+    E.exporterpdff(ui->textpdf);
+}
+
+

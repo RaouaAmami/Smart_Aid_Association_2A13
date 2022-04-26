@@ -3,6 +3,10 @@
 #define EMPLOYEE_H
 #include<QSqlQuery>
 #include<QSqlQueryModel>
+#include <QTextBrowser>
+#include <QPrinter>
+#include <QDialog>
+#include "QFileDialog"
 
 
 class employee
@@ -28,8 +32,17 @@ public:
     void setID(int ID_EMP){this->ID_EMP=ID_EMP;}
 
     bool ajouter();
+    bool modifier();
     QSqlQueryModel * afficher ();
     bool supprimer(int);
+    QSqlQueryModel * rechercher(QString);
+    QSqlQueryModel * afficherTri_id();
+    QSqlQueryModel * afficherTri_nom();
+    QSqlQueryModel * afficherTri_prenom();
+    QSqlQueryModel * afficherTri_cin();
+    void exporterpdff(QTextBrowser *text);
+    QString login(QString us , QString pw);
+
 };
 
 #endif // EMPLOYEE_H
