@@ -36,7 +36,6 @@ SOURCES += \
     connection.cpp \
     mainwindow.cpp \
     malek.cpp \
-    maps.cpp \
     parking.cpp \
     rania.cpp \
     rawaa.cpp \
@@ -55,7 +54,6 @@ HEADERS += \
     mainwindow.h \
     connection.h \
     malek.h \
-    maps.h \
     parking.h \
     rania.h \
     rawaa.h \ \
