@@ -84,10 +84,10 @@ void Rania::on_pushButton_Ajoutter_clicked()
 void Rania::on_Modiffier_clicked()
 {
     int id_benevol= ui->lineEdit->text().toInt();
-    QString nom_benevol=ui->lineEdit_2->text();
+    QString nom_benevol=ui->lineEdit_8->text();
     QString prenom_benevol=ui->lineEdit_3->text();
     int tel_benevol= ui->lineEdit_5->text().toInt();
-    QString adresse_benevol=ui->lineEdit_6->text();
+    QString adresse_benevol=ui->lineEdit_9->text();
     bool test=false;
 
 benevol Ben(id_benevol ,nom_benevol ,prenom_benevol ,tel_benevol ,adresse_benevol);

@@ -1,7 +1,7 @@
 #ifndef MALEK_H
 #define MALEK_H
 
-
+#include<arduino.h>
 
 
 #include <QDialog>
@@ -48,11 +48,13 @@ private slots:
     void on_aller_clicked();
 
     void on_pushButton_2_clicked();
-
+void update_label();
 
 private:
     Ui::Malek *ui;
     evenement e ;
+    QString data;
+    Arduino A;
     stat_categorie *third;
 
    // stat_categorie *third;

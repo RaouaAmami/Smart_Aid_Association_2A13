@@ -4,6 +4,14 @@
 #include "mainwindow.h"
 #include "evenement.cpp"
 
+//arduino
+#include<QDebug>
+#include<arduino.h>
+#include<QObject>
+#include<QtSerialPort>
+#include<QtSerialPort/QSerialPort> //classe rassemblant des fonctions permettent l'echange des données
+#include<QtSerialPort/QSerialPortInfo> //classe fournissant des informations sur les ports disponibles*
+
 
 Malek::Malek(QWidget *parent) :
     QDialog(parent),
@@ -11,7 +19,18 @@ Malek::Malek(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
+    //arduino
+        int ret=A.connect_arduino();
+        switch(ret)
+        {
+        case(0):qDebug()<< "arduino is available and connected to : " << A.getarduino_port_name();
+            break;
+        case(1):qDebug()<<"arduino is available but not connected to : " << A.getarduino_port_name();
+            break;
+        case(-1):qDebug()<<"arduino is not available : " << A.getarduino_port_name();
+        }
+        QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+        //
     ui->line_id->setValidator( new QIntValidator(100, 999999, this)); //controle de saisie
     QRegExp rx("[a-zA-Z]+");
         QValidator *validator = new
@@ -506,4 +525,18 @@ void Malek::on_stat_clicked()
     third = new stat_categorie(this);                                                                                 // pour ouvrir la fenetre contenant stat
       third->choix_pie();
       third->show();
+}
+
+
+void Malek::update_label() //affichage
+{
+    data=A.read_from_arduino();//data hya y9raha qt ml arduino //
+    QString Sstring = QString(data); //
+         Sstring.remove("\r\n");//tna7i /r , /n
+
+ if (Sstring== "0")
+ui->label_6->setText("mouvement détécté ");
+
+else if (Sstring == "1")
+ui->label_6->setText("Pas de mouvement");
 }

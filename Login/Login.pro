@@ -1,4 +1,5 @@
 QT += printsupport
+QT += serialport
 QT       += core gui
 QT       += core gui sql
 QT += core gui network
