@@ -26,7 +26,7 @@ QSqlQueryModel * enfant::afficher()
 {
     QSqlQueryModel * model= new QSqlQueryModel();
 
-    model->setQuery("SELECT * FROM ENFANT ");
+    model->setQuery("SELECT * FROM ENFANTS ");
 
 
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_E"));

@@ -8,7 +8,7 @@ Rawaa::Rawaa(QWidget *parent) :
 {
     ui->setupUi(this);
      ui->tableView1->setModel(tmpenfant.afficher());
-     ui->tableView1->setModel(tmpenfant.afficher());
+
 }
 
 Rawaa::~Rawaa()
